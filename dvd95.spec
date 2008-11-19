@@ -1,8 +1,8 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.4p0
-Release: 2%{?dist}
-License: GPL
+Release: 3%{?dist}
+License: GPL+
 Group: Applications/Archiving
 URL: http://dvd95.sourceforge.net/
 Source: http://dl.sf.net/dvd95/dvd95-%{version}.tar.gz
@@ -10,6 +10,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: libdvdread-devel
 BuildRequires: libgnomeui-devel
 BuildRequires: mpeg2dec-devel
+# Needed, otherwise translations don't work and the program starts in French
+BuildRequires: gettext
 
 %description
 DVD95 is a GNOME application to convert DVD9 (8.5G) to DVD5 (4.7G).
@@ -55,6 +57,10 @@ DVD95 support two copy modes :
 
 
 %changelog
+* Wed Nov 19 2008 Matthias Saou <http://freshrpms.net/> 1.4p0-3
+- Update license tag.
+- Add gettext build requirement to get english by default (#114).
+
 * Sat Oct 18 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 1.4p0-2
 - rebuild for RPM Fusion
 
