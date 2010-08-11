@@ -1,15 +1,22 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
-Version: 1.4p0
-Release: 4%{?dist}
+Version: 1.6p0
+Release: 1%{?dist}
 License: GPL+
 Group: Applications/Archiving
 URL: http://dvd95.sourceforge.net/
-Source: http://dl.sf.net/dvd95/dvd95-%{version}.tar.gz
+Source: http://downloads.sf.net/dvd95/dvd95-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: libdvdread-devel
+Requires: mplayer
+Requires: mencoder
+Requires: ffmpeg
+BuildRequires: libdvdread-devel >= 0.9.7
 BuildRequires: libgnomeui-devel
 BuildRequires: mpeg2dec-devel
+BuildRequires: mplayer
+BuildRequires: mencoder
+BuildRequires: ffmpeg
+BuildRequires: intltool
 # Needed, otherwise translations don't work and the program starts in French
 BuildRequires: gettext
 
@@ -57,6 +64,16 @@ DVD95 support two copy modes :
 
 
 %changelog
+* Wed Aug 11 2010 Matthias Saou <http://freshrpms.net/> 1.6p0-1
+- Update to 1.6p0 (#1332).
+- Add new (build)requirements : mplayer, mencoder, ffmpeg.
+
+* Wed Jul 10 2009 Matthias Saou <http://freshrpms.net/> 1.5p2-1
+- Update to 1.5p2.
+
+* Mon Apr 14 2009 Matthias Saou <http://freshrpms.net/> 1.5p0-1
+- Update to 1.5p0 (#546).
+
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4p0-4
 - rebuild for new F11 features
 
