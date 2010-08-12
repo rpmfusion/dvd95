@@ -1,0 +1,16 @@
+diff -Naupr dvd95-1.6p0.orig/dvd95.desktop dvd95-1.6p0/dvd95.desktop
+--- dvd95-1.6p0.orig/dvd95.desktop	2007-04-10 21:53:38.000000000 +0200
++++ dvd95-1.6p0/dvd95.desktop	2010-08-12 21:09:12.358064881 +0200
+@@ -3,10 +3,7 @@ Name=Dvd95
+ Comment=DVD9 to DVD5 converter
+ Comment[fr]=Convertisseur DVD9 vers DVD5
+ Exec=dvd95
+-Icon=dvd95/dvd9548.png
++Icon=/usr/share/pixmaps/dvd95/dvd9548.png
+ Terminal=false
+ Type=Application
+-Encoding=UTF-8
+-Categories=Application;AudioVideo;
+-X-Desktop-File-Install-Version=0.10
+-
++Categories=AudioVideo;X-OutputGeneration;
