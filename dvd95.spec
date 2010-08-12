@@ -1,11 +1,12 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.6p0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL+
 Group: Applications/Archiving
 URL: http://dvd95.sourceforge.net/
 Source: http://downloads.sf.net/dvd95/dvd95-%{version}.tar.gz
+Patch0: dvd95-1.6p0-desktop.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: mplayer
 Requires: mencoder
@@ -38,6 +39,7 @@ DVD95 support two copy modes :
 
 %prep
 %setup -q
+%patch0 -p1 -b .desktop
 
 
 %build
@@ -64,6 +66,9 @@ DVD95 support two copy modes :
 
 
 %changelog
+* Thu Aug 12 2010 Matthias Saou <http://freshrpms.net/> 1.6p0-2
+- Fix desktop file (#889).
+
 * Wed Aug 11 2010 Matthias Saou <http://freshrpms.net/> 1.6p0-1
 - Update to 1.6p0 (#1332).
 - Add new (build)requirements : mplayer, mencoder, ffmpeg.
