@@ -1,7 +1,7 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.6p0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: GPL+
 Group: Applications/Archiving
 URL: http://dvd95.sourceforge.net/
@@ -66,6 +66,9 @@ DVD95 support two copy modes :
 
 
 %changelog
+* Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 1.6p0-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Sun May 26 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.6p0-6
 - Rebuilt for x264/FFmpeg
 
