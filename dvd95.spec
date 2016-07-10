@@ -1,13 +1,14 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
-Version: 1.6p0
-Release: 7%{?dist}
+Version: 1.7p0
+Release: 1%{?dist}
 License: GPL+
 Group: Applications/Archiving
 URL: http://dvd95.sourceforge.net/
-Source: http://downloads.sf.net/dvd95/dvd95-%{version}.tar.gz
+Source: https://sourceforge.net/code-snapshots/git/d/dv/dvd95/code.git/dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980.zip
 Patch0: dvd95-1.6p0-desktop.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+Patch1: dvd95-hardening.patch
+Patch2: dvd95-format-security.patch
 Requires: mplayer
 Requires: mencoder
 Requires: ffmpeg
@@ -17,7 +18,7 @@ BuildRequires: mpeg2dec-devel
 BuildRequires: mplayer
 BuildRequires: mencoder
 BuildRequires: ffmpeg
-BuildRequires: intltool
+BuildRequires: intltool libtool
 # Needed, otherwise translations don't work and the program starts in French
 BuildRequires: gettext
 
@@ -38,8 +39,11 @@ DVD95 support two copy modes :
 
 
 %prep
-%setup -q
+%setup -q -n dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980
 %patch0 -p1 -b .desktop
+%patch1 -p1 -b .hardening
+%patch2 -p1 -b .format-security
+autoreconf -i 
 
 
 %build
@@ -48,24 +52,22 @@ DVD95 support two copy modes :
 
 
 %install
-%{__rm} -rf %{buildroot}
 %{__make} install DESTDIR="%{buildroot}" prefix="%{_prefix}"
 %find_lang %{name}
 
 
-%clean
-%{__rm} -rf %{buildroot}
-
-
 %files -f %{name}.lang
-%defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING README TODO
+%doc AUTHORS ChangeLog README TODO
+%license COPYING
 %{_bindir}/dvd95
 %{_datadir}/applications/dvd95.desktop
 %{_datadir}/pixmaps/dvd95/
 
 
 %changelog
+* Sun Jul 10 2016 Sérgio Basto <sergio@serjux.com> - 1.7p0-1
+- Update dvd95 to 1.7p0 last git version
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 1.6p0-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
@@ -88,10 +90,10 @@ DVD95 support two copy modes :
 - Update to 1.6p0 (#1332).
 - Add new (build)requirements : mplayer, mencoder, ffmpeg.
 
-* Wed Jul 10 2009 Matthias Saou <http://freshrpms.net/> 1.5p2-1
+* Fri Jul 10 2009 Matthias Saou <http://freshrpms.net/> 1.5p2-1
 - Update to 1.5p2.
 
-* Mon Apr 14 2009 Matthias Saou <http://freshrpms.net/> 1.5p0-1
+* Tue Apr 14 2009 Matthias Saou <http://freshrpms.net/> 1.5p0-1
 - Update to 1.5p0 (#546).
 
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.4p0-4
