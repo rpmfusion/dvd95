@@ -1,0 +1,22 @@
+--- dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980/src/uitools.c.orig	2016-07-10 05:24:20.128952672 +0100
++++ dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980/src/uitools.c	2016-07-10 05:28:54.336505447 +0100
+@@ -95,8 +95,9 @@ int MessageBoxError( char * format, ...
+ 	mbox = gtk_message_dialog_new( GTK_WINDOW(MainDlg),
+ 					GTK_DIALOG_MODAL,
+ 					GTK_MESSAGE_ERROR,
+-					GTK_BUTTONS_OK,
+-					(const gchar *)message );
++					GTK_BUTTONS_OK, 
++                    "%s",
++					(const gchar *) message );
+ 	gtk_dialog_run( GTK_DIALOG( mbox ) );
+ 	gtk_widget_destroy( GTK_WIDGET( mbox ) );
+ 	return( 0 );
+@@ -123,6 +124,7 @@ int MessageBoxYesNo( char * format, ...
+ 					GTK_DIALOG_MODAL,
+ 					GTK_MESSAGE_QUESTION,
+ 					GTK_BUTTONS_YES_NO,
++                    "%s",
+ 					(const gchar *)message );
+ 	b = gtk_dialog_run( GTK_DIALOG( mbox ) );
+ 	gtk_widget_destroy( GTK_WIDGET( mbox ) );
