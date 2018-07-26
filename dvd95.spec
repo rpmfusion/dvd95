@@ -14,7 +14,7 @@ Requires: mencoder
 Requires: ffmpeg
 BuildRequires: libdvdread-devel >= 0.9.7
 BuildRequires: libgnomeui-devel
-BuildRequires: mpeg2dec-devel
+BuildRequires: libmpeg2-devel
 BuildRequires: mplayer
 BuildRequires: mencoder
 BuildRequires: ffmpeg
