@@ -1,7 +1,7 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.7p0
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: GPL+
 Group: Applications/Archiving
 URL: http://dvd95.sourceforge.net/
@@ -65,6 +65,9 @@ autoreconf -i
 
 
 %changelog
+* Wed Oct 21 2020 Leigh Scott <leigh123linux@gmail.com> - 1.7p0-11
+- Rebuild for new libdvdread
+
 * Mon Aug 17 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.7p0-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
