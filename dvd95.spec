@@ -2,16 +2,17 @@ Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.7p0
 Release: 18%{?dist}
-License: GPL+
-Group: Applications/Archiving
+License: GPL-2.0-or-later
 URL: http://dvd95.sourceforge.net/
 Source: https://sourceforge.net/code-snapshots/git/d/dv/dvd95/code.git/dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980.zip
 Patch0: dvd95-1.6p0-desktop.patch
 Patch1: dvd95-hardening.patch
 Patch2: dvd95-format-security.patch
+
 Requires: mplayer
 Requires: mencoder
 Requires: ffmpeg
+
 BuildRequires: libdvdread-devel >= 0.9.7
 BuildRequires: libgnomeui-devel
 BuildRequires: libmpeg2-devel
@@ -40,19 +41,19 @@ DVD95 support two copy modes :
 
 %prep
 %setup -q -n dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980
-%patch0 -p1 -b .desktop
-%patch1 -p1 -b .hardening
-%patch2 -p1 -b .format-security
-autoreconf -i 
+%patch -P0 -p1 -b .desktop
+%patch -P1 -p1 -b .hardening
+%patch -P2 -p1 -b .format-security
+autoreconf -i
 
 
 %build
 %configure
-%{__make} %{?_smp_mflags}
+%make_build
 
 
 %install
-%{__make} install DESTDIR="%{buildroot}" prefix="%{_prefix}"
+%make_install
 %find_lang %{name}
 
 
