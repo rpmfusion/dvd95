@@ -13,6 +13,7 @@ Requires: mplayer
 Requires: mencoder
 Requires: ffmpeg
 
+BuildRequires: desktop-file-utils
 BuildRequires: libdvdread-devel >= 0.9.7
 BuildRequires: libgnomeui-devel
 BuildRequires: libmpeg2-devel
@@ -54,6 +55,7 @@ autoreconf -i
 
 %install
 %make_install
+desktop-file-validate %{buildroot}%{_datadir}/applications/dvd95.desktop
 %find_lang %{name}
 
 
