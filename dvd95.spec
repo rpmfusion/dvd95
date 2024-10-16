@@ -1,13 +1,16 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.7p0
-Release: 18%{?dist}
+Release: 19%{?dist}
 License: GPL-2.0-or-later
 URL: http://dvd95.sourceforge.net/
 Source: https://sourceforge.net/code-snapshots/git/d/dv/dvd95/code.git/dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980.zip
 Patch0: dvd95-1.6p0-desktop.patch
 Patch1: dvd95-hardening.patch
 Patch2: dvd95-format-security.patch
+# Patch for c99 confirmant, fix for
+# -Werror=implicit-function-declaration, -Werror=incompatible-pointer-types
+Patch3: dvd95-include-type-cat-c99.patch
 
 Requires: mplayer
 Requires: mencoder
@@ -45,6 +48,7 @@ DVD95 support two copy modes :
 %patch -P0 -p1 -b .desktop
 %patch -P1 -p1 -b .hardening
 %patch -P2 -p1 -b .format-security
+%patch -P3 -p1 -b .c99
 autoreconf -i
 
 
@@ -68,6 +72,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dvd95.desktop
 
 
 %changelog
+* Wed Oct 16 2024 Mamoru TASAKA <mtasaka@fedoraproject.org> - 1.7p0-19
+- Fix FTBFS with c99, -Werror=implicit-function-declaration
+  -Werror=incompatible-pointer-types
+
 * Thu Aug 01 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.7p0-18
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 

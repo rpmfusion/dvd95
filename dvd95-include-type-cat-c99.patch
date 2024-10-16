@@ -1,0 +1,110 @@
+Binary files dvd95-orig/dvdauthor/.libs/dvdauthor.o and dvd95-new/dvdauthor/.libs/dvdauthor.o differ
+Binary files dvd95-orig/dvdauthor/.libs/dvdvob.o and dvd95-new/dvdauthor/.libs/dvdvob.o differ
+diff -urp '--exclude=*~' dvd95-orig/dvdauthor/dvdauthor.h dvd95-new/dvdauthor/dvdauthor.h
+--- dvd95-orig/dvdauthor/dvdauthor.h	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/dvdauthor/dvdauthor.h	2024-10-15 23:58:10.917031226 +0900
+@@ -41,6 +41,8 @@ void pgc_set_color(struct pgc *p,int ind
+ void pgc_set_buttongroup(struct pgc *p,int index,unsigned char *map);
+ #endif
+ void pgc_set_stilltime(struct pgc *p,int still);
++void dvdpgc__init(void);
++void dvdvob__init(void);
+ 
+ enum { VIDEO_ANY=0, VIDEO_MPEG, VIDEO_FORMAT, VIDEO_ASPECT, VIDEO_RESOLUTION, VIDEO_WIDESCREEN, VIDEO_FRAMERATE, VIDEO_CAPTION };
+ enum { AUDIO_ANY=0, AUDIO_FORMAT, AUDIO_QUANT, AUDIO_DOLBY, AUDIO_LANG, AUDIO_CHANNELS, AUDIO_SAMPLERATE };
+Binary files dvd95-orig/dvdauthor/dvdauthor.o and dvd95-new/dvdauthor/dvdauthor.o differ
+diff -urp '--exclude=*~' dvd95-orig/dvdauthor/dvdcli.c dvd95-new/dvdauthor/dvdcli.c
+--- dvd95-orig/dvdauthor/dvdcli.c	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/dvdauthor/dvdcli.c	2024-10-15 23:53:59.565585994 +0900
+@@ -26,6 +26,7 @@
+ 
+ #include "conffile.h"
+ #include "dvdauthor.h"
++#include "libauthor.h"
+ #include "readxml.h"
+ #include "rgb.h"
+ 
+diff -urp '--exclude=*~' dvd95-orig/dvdauthor/dvdcompile.c dvd95-new/dvdauthor/dvdcompile.c
+--- dvd95-orig/dvdauthor/dvdcompile.c	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/dvdauthor/dvdcompile.c	2024-10-15 23:48:38.733027769 +0900
+@@ -24,6 +24,7 @@
+ #include "dvdauthor.h"
+ #include "da-internal.h"
+ #include "dvdvm.h"
++#include "libauthor.h"
+ 
+ static const char RCSID[]="$Id: //depot/dvdauthor/src/dvdcompile.c#15 $";
+ 
+diff -urp '--exclude=*~' dvd95-orig/dvdauthor/dvdifo.c dvd95-new/dvdauthor/dvdifo.c
+--- dvd95-orig/dvdauthor/dvdifo.c	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/dvdauthor/dvdifo.c	2024-10-15 23:53:30.278535034 +0900
+@@ -25,6 +25,7 @@
+ 
+ #include "dvdauthor.h"
+ #include "da-internal.h"
++#include "libauthor.h"
+ 
+ static const char RCSID[]="$Id: //depot/dvdauthor/src/dvdifo.c#19 $";
+ 
+diff -urp '--exclude=*~' dvd95-orig/dvdauthor/dvdpgc.c dvd95-new/dvdauthor/dvdpgc.c
+--- dvd95-orig/dvdauthor/dvdpgc.c	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/dvdauthor/dvdpgc.c	2024-10-15 23:53:43.066557287 +0900
+@@ -25,6 +25,7 @@
+ 
+ #include "dvdauthor.h"
+ #include "da-internal.h"
++#include "libauthor.h"
+ 
+ static const char RCSID[]="$Id: //depot/dvdauthor/src/dvdpgc.c#20 $";
+ 
+diff -urp '--exclude=*~' dvd95-orig/dvdauthor/dvdvml.c dvd95-new/dvdauthor/dvdvml.c
+--- dvd95-orig/dvdauthor/dvdvml.c	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/dvdauthor/dvdvml.c	2024-10-15 23:52:52.023468474 +0900
+@@ -79,7 +79,7 @@
+ #else
+ #define YY_PROTO(proto) ()
+ #endif
+-
++#include "libauthor.h"
+ /* Returned upon end-of-file. */
+ #define YY_NULL 0
+ 
+Binary files dvd95-orig/dvdauthor/dvdvob.o and dvd95-new/dvdauthor/dvdvob.o differ
+diff -urp '--exclude=*~' dvd95-orig/dvdauthor/readxml.c dvd95-new/dvdauthor/readxml.c
+--- dvd95-orig/dvdauthor/readxml.c	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/dvdauthor/readxml.c	2024-10-15 23:58:47.576109757 +0900
+@@ -27,6 +27,7 @@
+ 
+ #include <libxml/xmlreader.h>
+ 
++#include "libauthor.h"
+ #include "readxml.h"
+ 
+ #ifdef HAVE_LANGINFO_CODESET
+Binary files dvd95-orig/src/dvd2vob.o and dvd95-new/src/dvd2vob.o differ
+Binary files dvd95-orig/src/dvdbackup.o and dvd95-new/src/dvdbackup.o differ
+diff -urp '--exclude=*~' dvd95-orig/src/systools.c dvd95-new/src/systools.c
+--- dvd95-orig/src/systools.c	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/src/systools.c	2024-10-16 00:06:25.065089752 +0900
+@@ -357,8 +357,8 @@ char * mode;
+ 			new_argv[2] = command;
+ 			new_argv[3] = NULL;
+ 			(void) execve(	SH_PATH,
+-					(const char **) new_argv,
+-					(const char **)environ);
++					(char * const *)new_argv,
++					(char * const *)environ);
+ 			/* Die if it failed.  */
+ 			_exit(127);
+ 		}
+diff -urp '--exclude=*~' dvd95-orig/src/vaporize.h dvd95-new/src/vaporize.h
+--- dvd95-orig/src/vaporize.h	2013-03-01 05:47:05.000000000 +0900
++++ dvd95-new/src/vaporize.h	2024-10-16 00:00:49.435370790 +0900
+@@ -26,6 +26,7 @@ int VaporizeFactor(double factor, int dy
+ int VaporizeInjection(char *fileName);
+ int Vaporize(long long size, void *parm);
+ int VaporizeTerm(void);
++void VaporizeForgeSubs( int v );
+ void VaporizeSizes(int *pVideoPacketSize, int *pAudioPacketSize, int *pSubPacketSize, int *pNavPacketSize);
+ void VaporizePacks(int *videoPacks, int *auxPacks);
+ #ifdef __cplusplus
