@@ -1,7 +1,7 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.7p0
-Release: 19%{?dist}
+Release: 20%{?dist}
 License: GPL-2.0-or-later
 URL: http://dvd95.sourceforge.net/
 Source: https://sourceforge.net/code-snapshots/git/d/dv/dvd95/code.git/dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980.zip
@@ -72,6 +72,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dvd95.desktop
 
 
 %changelog
+* Tue Jan 28 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.7p0-20
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
 * Wed Oct 16 2024 Mamoru TASAKA <mtasaka@fedoraproject.org> - 1.7p0-19
 - Fix FTBFS with c99, -Werror=implicit-function-declaration
   -Werror=incompatible-pointer-types
