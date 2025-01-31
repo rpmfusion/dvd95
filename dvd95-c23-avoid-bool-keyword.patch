@@ -1,9 +1,3 @@
-commit 1be2ee9b89f96bc50d52138c6f12d2979f4715fc
-Author: Mamoru TASAKA <mtasaka@fedoraproject.org>
-Date:   Fri Jan 31 15:01:28 2025 +0900
-
-    save
-
 diff --git a/src/callbacks.c b/src/callbacks.c
 index e06cf5a..57b88b1 100644
 --- a/src/callbacks.c
