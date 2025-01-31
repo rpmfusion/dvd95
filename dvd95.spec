@@ -1,7 +1,7 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.7p0
-Release: 20%{?dist}
+Release: 21%{?dist}
 License: GPL-2.0-or-later
 URL: http://dvd95.sourceforge.net/
 Source: https://sourceforge.net/code-snapshots/git/d/dv/dvd95/code.git/dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980.zip
@@ -11,6 +11,10 @@ Patch2: dvd95-format-security.patch
 # Patch for c99 confirmant, fix for
 # -Werror=implicit-function-declaration, -Werror=incompatible-pointer-types
 Patch3: dvd95-include-type-cat-c99.patch
+# Patch for C23 strict function prototype
+Patch4: dvd95-c23-function-prototype.patch
+# Patch for C23 to avoid bool keyword
+Patch5: dvd95-c23-avoid-bool-keyword.patch
 
 Requires: mplayer
 Requires: mencoder
@@ -49,8 +53,9 @@ DVD95 support two copy modes :
 %patch -P1 -p1 -b .hardening
 %patch -P2 -p1 -b .format-security
 %patch -P3 -p1 -b .c99
+%patch -P4 -p1 -b .c23_proto
+%patch -P5 -p1 -b .c23_bool
 autoreconf -i
-
 
 %build
 %configure
@@ -72,6 +77,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dvd95.desktop
 
 
 %changelog
+* Fri Jan 31 2025 Mamoru TASAKA <mtasaka@fedoraproject.org> - 1.7p0-21
+- Support C23 strict function prototype
+- Support C23, remove bool keyword usage
+
 * Tue Jan 28 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.7p0-20
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 

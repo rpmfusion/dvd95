@@ -1,0 +1,56 @@
+commit a8ca76462f4d88547624673e6c6c094a2af6a237
+Author: Mamoru TASAKA <mtasaka@fedoraproject.org>
+Date:   Fri Jan 31 14:54:02 2025 +0900
+
+    once save
+
+diff --git a/dvdauthor/libauthor.c b/dvdauthor/libauthor.c
+index e8e923d..6446570 100644
+--- a/dvdauthor/libauthor.c
++++ b/dvdauthor/libauthor.c
+@@ -36,7 +36,7 @@ COMMENTAIRE :
+ 
+ static jmp_buf	JmpEnv;
+ 
+-static void ( * StatusFunction)();
++static void ( * StatusFunction)(char *);
+ 
+ static char * FileTable =  NULL;
+ static int NrFile;
+@@ -125,7 +125,7 @@ void AuthorStatus( char * format, ... )
+ Linux!jef 2006/02/24 22:09:01
+ ------------------------------------------------------------------------------*/
+ 
+-void SetStatusFunction( void (*stFun)() )
++void SetStatusFunction( void (*stFun)(char *) )
+ {
+ 	StatusFunction = stFun;
+ }
+diff --git a/dvdauthor/libauthor.h b/dvdauthor/libauthor.h
+index 066a929..bc71349 100644
+--- a/dvdauthor/libauthor.h
++++ b/dvdauthor/libauthor.h
+@@ -20,7 +20,7 @@ COMMENTAIRE :
+ extern "C" {
+ #endif
+ void AuthorStatus PROTO((char *format, ...));
+-void SetStatusFunction PROTO((void (*stFun)()));
++void SetStatusFunction PROTO((void (*stFun)(char *)));
+ int DvdAuthorMain PROTO((int argc, char **argv));
+ void Exit PROTO((int retCode));
+ void ExitAuthor PROTO((void));
+diff --git a/src/vaporize.c b/src/vaporize.c
+index 13522ef..6ac80bb 100644
+--- a/src/vaporize.c
++++ b/src/vaporize.c
+@@ -149,8 +149,8 @@ char *injections_file = NULL;		// where to inject internal status from
+ const char  progname [] = "vamps";	// we're sucking bytes!
+ static int NoAudioTrack;
+ static int NoSubpTrack;
+-static int ( * ReadFun)();
+-static int ( * WriteFun)();
++static int ( * ReadFun)(void *, unsigned char *, int);
++static int ( * WriteFun)(void *, unsigned char *, int);
+ static void * Parm;
+ static jmp_buf	JmpEnv;
+ static int VideoPacketSize;
