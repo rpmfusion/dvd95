@@ -1,7 +1,7 @@
 Summary: Graphical dvd9 to dvd5 converter
 Name: dvd95
 Version: 1.7p0
-Release: 22%{?dist}
+Release: 23%{?dist}
 License: GPL-2.0-or-later
 URL: http://dvd95.sourceforge.net/
 Source: https://sourceforge.net/code-snapshots/git/d/dv/dvd95/code.git/dvd95-code-01dd592f7a8352d61fd5d8faa75463ebfd954980.zip
@@ -77,6 +77,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/dvd95.desktop
 
 
 %changelog
+* Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.7p0-23
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
+
 * Sun Jul 27 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.7p0-22
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
 
